@@ -11,10 +11,6 @@ export default class Child extends Component{
     console.log("componentWillMount");
   }
 
-  componentWillMount(){
-    console.log("componentWillMount");
-  }
-
   componentDidMount(){
     console.log("componentDidMount");
   }

@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
-import {View, Button, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import ShowText from './components/ShowText';
 import Child from './components/Child';
+import ButtonComp from './components/Button';
+
 
 export default class Main extends Component {
     state = {
@@ -14,7 +16,7 @@ export default class Main extends Component {
     };
 
     handleDecrease = () => {
-        this.setState({number: this.state.number - 1})
+        this.setState({number: this.state.number - 1});
     };
 
     changBgColor = () => {
@@ -27,19 +29,23 @@ export default class Main extends Component {
               width:'100%',
               justifyContent:'center',
               backgroundColor:this.state.bg}}>
-                <Button
-                    style={styles.btnStyle}
+                <ButtonComp
                     title="Increase"
-                    color = "#15c"
+                    textColor = "#000"
+                    bgColor = "#397af8"
                     onPress={this.handleIncrease}/>
+
                 <ShowText text = {this.state.number}/>
-                <Button
-                    style={styles.btnStyle}
+
+                <ButtonComp
                     title="Decrease"
+                    bgColor = "orange"
                     onPress={this.handleDecrease}/>
-                <Button
-                    style={styles.btnStyle}
+
+                <ButtonComp
+                    textColor = "#000"
                     title="Change bg-color"
+                    bgColor = "#f0f0f0"
                     onPress={this.changBgColor}/>
             </View>
         )
