@@ -1,22 +1,24 @@
 import React, {Component} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View} from 'react-native';
+import {connect} from 'react-redux';
+import * as actions from './actions';
 import ShowText from './components/ShowText';
 import Child from './components/Child';
 import ButtonComp from './components/Button';
 
 
-export default class Main extends Component {
+class Main extends Component {
     state = {
         number: 0,
         bg:'green'
     };
 
     handleIncrease = () => {
-        this.setState({number: this.state.number + 1})
+        this.props.counterIncrease();
     };
 
     handleDecrease = () => {
-        this.setState({number: this.state.number - 1});
+        this.props.counterDecrease();
     };
 
     changBgColor = () => {
@@ -35,7 +37,7 @@ export default class Main extends Component {
                     bgColor = "#397af8"
                     onPress={this.handleIncrease}/>
 
-                <ShowText text = {this.state.number}/>
+                <Child/>
 
                 <ButtonComp
                     title="Decrease"
@@ -52,18 +54,4 @@ export default class Main extends Component {
     }
 }
 
-const styles = StyleSheet.create({
-    text:{
-        fontSize:24,
-        fontWeight:"bold",
-        color:'red'
-    },
-    btnStyle:{
-        width:100,
-        height:40,
-        borderWidth:1,
-        borderStyle:'solid',
-        borderColor:"red",
-        backgroundColor:"#15c"
-    },
-});
+export default connect(null, actions)(Main);

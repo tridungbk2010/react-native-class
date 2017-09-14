@@ -1,51 +1,69 @@
-import React,{Component} from 'react';
-import {View, Text} from 'react-native';
+import React, {Component} from 'react';
+import {View, Text, StyleSheet} from 'react-native';
+import {connect} from 'react-redux';
 
-export default class Child extends Component{
-  constructor(props) {
-    super(props);
-    console.log("Constructor");
-  }
 
-  componentWillMount(){
-    console.log("componentWillMount");
-  }
-
-  componentDidMount(){
-    console.log("componentDidMount");
-  }
-
-  componentWillReceiveProps(nextProps){
-    console.log("componentWillReceiveProps");
-  }
-
-  shouldComponentUpdate(nextProps, nextState){
-      if(nextProps.text !== this.props.text){
-        console.log("shouldComponentUpdate");
-        return true;
-      }
-      return false;
-  }
-
-  componentWillUpdate(nextProps, nextState){
-    if(nextProps.text >= 2){
-        console.log("componentWillUpdate after click 2 times");
-    }else {
-    console.log("componentWillUpdate");
+class Child extends Component {
+    constructor(props) {
+        super(props);
+        console.log("Constructor");
     }
 
-  }
+    // componentWillMount(){
+    //   console.log("componentWillMount");
+    // }
+    //
+    // componentDidMount(){
+    //   console.log("componentDidMount");
+    // }
+    //
+    // componentWillReceiveProps(nextProps){
+    //   console.log("componentWillReceiveProps");
+    // }
+    //
+    // shouldComponentUpdate(nextProps, nextState){
+    //     if(nextProps.text !== this.props.text){
+    //       console.log("shouldComponentUpdate");
+    //       return true;
+    //     }
+    //     return false;
+    // }
+    //
+    // componentWillUpdate(nextProps, nextState){
+    //   if(nextProps.text >= 2){
+    //       console.log("componentWillUpdate after click 2 times");
+    //   }else {
+    //   console.log("componentWillUpdate");
+    //   }
+    //
+    // }
+    //
+    // componentDidUpdate(prevProps, prevState){
+    //   console.log("componentDidUpdate");
+    // }
 
-  componentDidUpdate(prevProps, prevState){
-    console.log("componentDidUpdate");
-  }
-
-  render(){
-    console.log("Render");
-    return(
-      <View>
-        <Text>{this.props.text}</Text>
-      </View>
-    )
-  }
+    render() {
+        return (
+            <View>
+                <Text style = {styles.text} >{this.props.counter}</Text>
+            </View>
+        )
+    }
 }
+
+const mapStateToProps = state => ({
+    counter: state.counter
+});
+
+export default connect(mapStateToProps, null)(Child);
+
+const styles =StyleSheet.create({
+    text: {
+        fontSize: 24,
+        fontWeight:'bold',
+        // flex:1,
+        color:'#fff',
+        justifyContent:"center",
+        alignItems:"center"
+    }
+})
