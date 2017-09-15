@@ -1,21 +1,18 @@
 import React, {Component} from 'react';
 import {View, StyleSheet} from 'react-native';
-import ShowText from './components/ShowText';
-// import Child from './components/Child';
+// import ShowText from './components/ShowText';
+import Child from './components/Child';
 import ButtonComp from './components/Button';
+import * as actions from './actions';
+import {connect} from 'react-redux';
 
-export default class Main extends Component {
-    state = {
-        number: 0,
-        bg: 'green'
-    };
-
+class Main extends Component {
     handleIncrease = () => {
-        this.setState({number: this.state.number + 1})
+        this.props.counterIncrease();
     };
 
     handleDecrease = () => {
-        this.setState({number: this.state.number - 1});
+        this.props.counterDecrease();
     };
 
     render() {
@@ -31,8 +28,7 @@ export default class Main extends Component {
                     justifyContent:"center",
                     alignItems:"center"
                 }}>
-                    <ShowText
-                        text={this.state.number}/>
+                    <Child/>
                 </View>
                 <View style = {{flex:1}}>
                     <ButtonComp
@@ -50,6 +46,8 @@ export default class Main extends Component {
         )
     }
 }
+
+export default connect(null, actions)(Main);
 
 const styles = StyleSheet.create({
     text: {

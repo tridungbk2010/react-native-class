@@ -43,6 +43,7 @@ class Child extends Component {
     // }
 
     render() {
+        console.log("child", this.props.counter);
         return (
             <View>
                 <Text style = {styles.text} >{this.props.counter}</Text>
@@ -59,11 +60,7 @@ export default connect(mapStateToProps, null)(Child);
 
 const styles =StyleSheet.create({
     text: {
-        fontSize: 24,
-        fontWeight:'bold',
-        // flex:1,
-        color:'#fff',
-        justifyContent:"center",
-        alignItems:"center"
+        fontSize: 100,
+        color:'#000',
     }
-})
+});

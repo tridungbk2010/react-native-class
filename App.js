@@ -2,10 +2,7 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import Main from './src/Main';
 import {Provider} from 'react-redux';
-import { createStore } from "redux";
-import reducers from './src/reducers';
-
-const store = createStore(reducers);
+import store from './src/store';
 
 export default class App extends React.Component {
     render() {
