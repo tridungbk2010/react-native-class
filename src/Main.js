@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Text, ActivityIndicator} from 'react-native';
 // import ShowText from './components/ShowText';
 import Child from './components/Child';
 import ButtonComp from './components/Button';
 import * as actions from './actions';
 import {connect} from 'react-redux';
+import _ from 'lodash';
 
 class Main extends Component {
     handleIncrease = () => {
@@ -13,6 +14,14 @@ class Main extends Component {
 
     handleDecrease = () => {
         this.props.counterDecrease();
+    };
+
+    handleStop = () => {
+        this.props.stopCounter();
+    };
+
+    fetchUser = () => {
+        this.props.fetchUser();
     };
 
     render() {
@@ -25,21 +34,48 @@ class Main extends Component {
             >
                 <View style={{
                     flex: 1,
-                    justifyContent:"center",
-                    alignItems:"center"
+                    justifyContent: "center",
+                    alignItems: "center"
                 }}>
                     <Child/>
                 </View>
-                <View style = {{flex:1}}>
+                {
+                    this.props.loading ? <View style={styles.userInfo}>
+                            <ActivityIndicator size = 'large'/>
+                        </View> :
+                        <View style={styles.userInfo}>
+                            <View style={styles.textBlock}>
+                                <Text style={styles.textUserInfo}>{`name: ${this.props.userInfo.name}`}</Text>
+                                <Text style={styles.textUserInfo}>{`name: ${this.props.userInfo.email}`}</Text>
+                            </View>
+                        </View>}
+                <View style={{flex: 1}}>
+                    <View style={{
+                        flexDirection: "row",
+                        justifyContent: "space-between"
+                    }}>
+                        <View style={{width: '50%'}}>
+                            <ButtonComp
+                                title="Increase"
+                                textColor="#fff"
+                                bgColor="#397af8"
+                                onPress={this.handleIncrease}/>
+                        </View>
+                        <View style={{width: '50%'}}>
+                            <ButtonComp
+                                title="Decrease"
+                                bgColor="orange"
+                                onPress={this.handleDecrease}/>
+                        </View>
+                    </View>
                     <ButtonComp
-                        title="Increase"
-                        textColor="#000"
-                        bgColor="#397af8"
-                        onPress={this.handleIncrease}/>
+                        title="Stop"
+                        bgColor="#15c"
+                        onPress={this.handleStop}/>
                     <ButtonComp
-                        title="Decrease"
-                        bgColor="orange"
-                        onPress={this.handleDecrease}/>
+                        title="Get User Info"
+                        bgColor="#15c"
+                        onPress={this.fetchUser}/>
                 </View>
 
             </View>
@@ -47,13 +83,31 @@ class Main extends Component {
     }
 }
 
-export default connect(null, actions)(Main);
+const mapStateToProps = (state) => ({
+    userInfo: state.userInfo,
+    loading:state.loading
+});
+
+export default connect(mapStateToProps, actions)(Main);
 
 const styles = StyleSheet.create({
     text: {
         fontSize: 24,
         fontWeight: "bold",
         color: 'red'
+    },
+    userInfo: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent:"center"
+    },
+    textBlock: {
+        flex: 1,
+        alignItems: 'flex-start',
+        justifyContent: "center"
+    },
+    textUserInfo: {
+        fontSize: 18
     },
     btnStyle: {
         width: 100,

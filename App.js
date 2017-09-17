@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
+import 'rxjs';
 import Main from './src/Main';
 import {Provider} from 'react-redux';
 import store from './src/store';
