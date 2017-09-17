@@ -6,6 +6,7 @@ import ButtonComp from './components/Button';
 import * as actions from './actions';
 import {connect} from 'react-redux';
 import _ from 'lodash';
+import {Circle, CircleSnail} from 'react-native-progress';
 
 class Main extends Component {
 
@@ -32,10 +33,15 @@ class Main extends Component {
                 </View>
                 {
                     this.props.loading ? <View style={styles.userInfo}>
-                            <ActivityIndicator size='large'/>
+                            <CircleSnail size={50}
+                                         spinDuration={1000}
+                                         color={['#00bcd4']}/>
                         </View> :
                         <View style={styles.userInfo}>
-                            <View style={styles.textBlock}>
+                            {_.isEmpty(this.props.userInfo) ? <View>
+                                <Text>* Please click GET USER INFO button to fetch data</Text>
+                                <Text>* Click Increase button to add more 30 times</Text>
+                            </View> : <View style={styles.textBlock}>
                                 <Text style={styles.textUserInfo}>
                                     {`Name: ${this.props.userInfo.name}`}
                                 </Text>
@@ -45,7 +51,7 @@ class Main extends Component {
                                 <Text style={styles.textUserInfo}>
                                     {`Email: ${this.props.userInfo.email}`}
                                 </Text>
-                            </View>
+                            </View>}
                         </View>
                 }
                 <View style={{flex: 1}}>
@@ -53,33 +59,40 @@ class Main extends Component {
                         flexDirection: "row",
                         justifyContent: "space-between"
                     }}>
-                        <View style={{width: '50%'}}>
+                        <View style={{width: '33%'}}>
                             <ButtonComp
                                 title="Increase"
                                 textColor="#fff"
                                 bgColor="#397af8"
                                 onPress={this.handleIncrease}/>
                         </View>
-                        <View style={{width: '50%'}}>
+                        <View style={{width: '33%'}}>
                             <ButtonComp
                                 title="Decrease"
                                 bgColor="orange"
                                 onPress={this.handleDecrease}/>
                         </View>
+                        <View style={{width: '33%'}}>
+                            <ButtonComp
+                                title="Reset"
+                                bgColor="#009688"
+                                onPress={this.handleStop}/>
+                        </View>
                     </View>
-                    <ButtonComp
-                        title="Stop"
-                        bgColor="#009688"
-                        onPress={this.handleStop}/>
                     <View style={{flexDirection: 'row'}}>
-                        <ButtonComp
-                            title="Get User Info"
-                            bgColor="#00bcd4"
-                            onPress={this.fetchUser}/>
-                        <ButtonComp
-                            title="Cancel request"
-                            bgColor="#9E9E9E"
-                            onPress={this.cancelRequest}/>
+                        <View style={{width: '50%'}}>
+                            <ButtonComp
+                                title="Get User Info"
+                                bgColor="#00bcd4"
+                                onPress={this.fetchUser}/>
+                        </View>
+                        <View style={{width: '50%'}}>
+                            <ButtonComp
+                                title="Cancel request"
+                                bgColor="#9E9E9E"
+                                onPress={this.cancelRequest}/>
+                        </View>
+
                     </View>
 
                 </View>

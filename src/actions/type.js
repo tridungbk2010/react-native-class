@@ -1,4 +1,5 @@
 export const INCREASE = 'increase';
+export const INCREASE_DONE = 'increase_done';
 export const DECREASE = 'decrease';
 export const STOP_COUNTER = 'stop_counter';
 export const FETCH_USER = 'fetch_user';

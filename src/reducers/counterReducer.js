@@ -1,10 +1,10 @@
-import {INCREASE, DECREASE, STOP_COUNTER} from '../actions/type';
+import {DECREASE, STOP_COUNTER, INCREASE_DONE} from '../actions/type';
 
 const initialState = 0;
 
 export default function (state = initialState, action) {
     switch (action.type) {
-        case INCREASE:
+        case INCREASE_DONE:
             return state + 1;
 
         case DECREASE:
