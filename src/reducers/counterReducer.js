@@ -11,7 +11,7 @@ export default function (state = initialState, action) {
             return state - 1;
 
         case STOP_COUNTER:
-            return state;
+            return 0;
 
         default:
             return state;

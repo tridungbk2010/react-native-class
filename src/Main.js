@@ -8,21 +8,12 @@ import {connect} from 'react-redux';
 import _ from 'lodash';
 
 class Main extends Component {
-    handleIncrease = () => {
-        this.props.counterIncrease();
-    };
 
-    handleDecrease = () => {
-        this.props.counterDecrease();
-    };
-
-    handleStop = () => {
-        this.props.stopCounter();
-    };
-
-    fetchUser = () => {
-        this.props.fetchUser();
-    };
+    handleIncrease = () => this.props.counterIncrease();
+    handleDecrease = () => this.props.counterDecrease();
+    handleStop = () => this.props.stopCounter();
+    fetchUser = () => this.props.fetchUser();
+    cancelRequest = () => this.props.cancelRequest();
 
     render() {
         return (
@@ -41,14 +32,22 @@ class Main extends Component {
                 </View>
                 {
                     this.props.loading ? <View style={styles.userInfo}>
-                            <ActivityIndicator size = 'large'/>
+                            <ActivityIndicator size='large'/>
                         </View> :
                         <View style={styles.userInfo}>
                             <View style={styles.textBlock}>
-                                <Text style={styles.textUserInfo}>{`name: ${this.props.userInfo.name}`}</Text>
-                                <Text style={styles.textUserInfo}>{`name: ${this.props.userInfo.email}`}</Text>
+                                <Text style={styles.textUserInfo}>
+                                    {`Name: ${this.props.userInfo.name}`}
+                                </Text>
+                                <Text style={styles.textUserInfo}>
+                                    {`Position: ${this.props.userInfo.position}`}
+                                </Text>
+                                <Text style={styles.textUserInfo}>
+                                    {`Email: ${this.props.userInfo.email}`}
+                                </Text>
                             </View>
-                        </View>}
+                        </View>
+                }
                 <View style={{flex: 1}}>
                     <View style={{
                         flexDirection: "row",
@@ -70,12 +69,19 @@ class Main extends Component {
                     </View>
                     <ButtonComp
                         title="Stop"
-                        bgColor="#15c"
+                        bgColor="#009688"
                         onPress={this.handleStop}/>
-                    <ButtonComp
-                        title="Get User Info"
-                        bgColor="#15c"
-                        onPress={this.fetchUser}/>
+                    <View style={{flexDirection: 'row'}}>
+                        <ButtonComp
+                            title="Get User Info"
+                            bgColor="#00bcd4"
+                            onPress={this.fetchUser}/>
+                        <ButtonComp
+                            title="Cancel request"
+                            bgColor="#9E9E9E"
+                            onPress={this.cancelRequest}/>
+                    </View>
+
                 </View>
 
             </View>
@@ -85,7 +91,7 @@ class Main extends Component {
 
 const mapStateToProps = (state) => ({
     userInfo: state.userInfo,
-    loading:state.loading
+    loading: state.loading
 });
 
 export default connect(mapStateToProps, actions)(Main);
@@ -99,7 +105,7 @@ const styles = StyleSheet.create({
     userInfo: {
         flex: 1,
         alignItems: 'center',
-        justifyContent:"center"
+        justifyContent: "center"
     },
     textBlock: {
         flex: 1,
@@ -107,7 +113,8 @@ const styles = StyleSheet.create({
         justifyContent: "center"
     },
     textUserInfo: {
-        fontSize: 18
+        fontSize: 16,
+        marginVertical: 4
     },
     btnStyle: {
         width: 100,
