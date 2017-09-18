@@ -33,7 +33,7 @@ class Main extends Component {
                 <View style = {{flex:1}}>
                     <ButtonComp
                         title="Increase"
-                        textColor="#000"
+                        textColor="#fff"
                         bgColor="#397af8"
                         onPress={this.handleIncrease}/>
                     <ButtonComp
