@@ -6,7 +6,7 @@ const fakeApi = () => Observable.of({
     name: "chris",
     position: "Front-end",
     email: "chris.ho@innovatube.com"
-}).delay(1000);
+}).delay(2000);
 
 export default action$ => action$.ofType(actionTypes.FETCH_USER)
     .mergeMap(() => fakeApi()
