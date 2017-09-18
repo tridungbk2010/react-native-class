@@ -3,7 +3,7 @@ import {Observable} from 'rxjs';
 
 export const counterEpic = action$ =>
     action$.ofType(INCREASE)
-        .mergeMap(action => Observable.timer(0,30)
+        .mergeMap(() => Observable.timer(0,30)
             .takeUntil(Observable.timer(1000))
             .map(() => ({type:INCREASE_DONE}))
             .takeUntil(action$.ofType(STOP_COUNTER))

@@ -6,7 +6,7 @@ import ButtonComp from './components/Button';
 import * as actions from './actions';
 import {connect} from 'react-redux';
 import _ from 'lodash';
-import {Circle, CircleSnail} from 'react-native-progress';
+import {CircleSnail} from 'react-native-progress';
 
 class Main extends Component {
 
