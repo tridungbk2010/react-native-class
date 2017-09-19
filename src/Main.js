@@ -31,29 +31,29 @@ class Main extends Component {
                 }}>
                     <Child/>
                 </View>
-                {
-                    this.props.loading ? <View style={styles.userInfo}>
-                            <CircleSnail size={50}
-                                         spinDuration={1000}
-                                         color={['#00bcd4']}/>
-                        </View> :
-                        <View style={styles.userInfo}>
-                            {_.isEmpty(this.props.userInfo) ? <View>
-                                <Text>* Please click GET USER INFO button to fetch data</Text>
-                                <Text>* Click Increase button to add more 30 times</Text>
-                            </View> : <View style={styles.textBlock}>
-                                <Text style={styles.textUserInfo}>
-                                    {`Name: ${this.props.userInfo.name}`}
-                                </Text>
-                                <Text style={styles.textUserInfo}>
-                                    {`Position: ${this.props.userInfo.position}`}
-                                </Text>
-                                <Text style={styles.textUserInfo}>
-                                    {`Email: ${this.props.userInfo.email}`}
-                                </Text>
-                            </View>}
-                        </View>
-                }
+
+                {this.props.loading && <View style={styles.userInfo}>
+                    <CircleSnail size={50}
+                                 spinDuration={1000}
+                                 color={['#00bcd4']}/>
+                </View>}
+                <View style={styles.userInfo}>
+                    {_.isEmpty(this.props.userInfo) ? <View>
+                        <Text>* Please click GET USER INFO button to fetch data</Text>
+                        <Text>* Click Increase button to add more 30 times</Text>
+                    </View> : <View style={styles.textBlock}>
+                        <Text style={styles.textUserInfo}>
+                            {`Name: ${this.props.userInfo.name}`}
+                        </Text>
+                        <Text style={styles.textUserInfo}>
+                            {`Position: ${this.props.userInfo.position}`}
+                        </Text>
+                        <Text style={styles.textUserInfo}>
+                            {`Email: ${this.props.userInfo.email}`}
+                        </Text>
+                    </View>}
+                </View>
+
                 <View style={{flex: 1}}>
                     <View style={{
                         flexDirection: "row",

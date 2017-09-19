@@ -3,15 +3,34 @@ import {
     DECREASE,
     STOP_COUNTER,
     FETCH_USER,
-    SHOW_LOADING_ICON,
-    HIDE_LOADING_ICON,
     CANCEL_FETCHING_USER
 } from './type';
 
-export const counterIncrease = () => ({type: INCREASE});
+import axios from 'axios';
+
+
+// export const counterIncreaseSuccess = () => ({type: INCREASE});
 export const counterDecrease = () => ({type: DECREASE});
 export const stopCounter = () => ({type: STOP_COUNTER});
 export const fetchUser = () => ({type: FETCH_USER});
 export const cancelRequest = () => ({type: CANCEL_FETCHING_USER});
 
+//call api to fetch data
+export const counterIncrease = () => async dispatch => {
+    await delay(1000);
+    dispatch({type: INCREASE});
+};
 
+
+const delay = (time) => new Promise(resolve => setTimeout(() => {
+    resolve(true);
+}, time));
+
+
+const fakeDataApi = () => new Promise(resolve => setTimeout(() => {
+    resolve({
+        name: "Chris Ho",
+        position: "JS Dev",
+        email: "tridungbk@gmail.com"
+    })
+}, 1000));
