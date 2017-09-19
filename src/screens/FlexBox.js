@@ -2,14 +2,24 @@ import React from 'react';
 import {View, Text} from 'react-native';
 import Box from './Box';
 
+
 export default class FlexBox extends React.Component {
 
     render() {
         return (
             <View style={styles.layout}>
-                <Box bgColor = "#009869" text = "box 1"/>
-                <Box bgColor = "#0091EA" text = "box 2"/>
-                <Box bgColor = "#3F51B5" text = "box 3"/>
+                <View style ={{
+                    flex:1
+
+                }}>
+                    <Box bgColor = "#009869" text = "box 1"/>
+                </View>
+                <View style ={{
+                    flex:1,
+                }}>
+                    <Box bgColor = "#0277BD" text = "box 2"/>
+                </View>
+
             </View>
         )
     }
@@ -18,8 +28,10 @@ export default class FlexBox extends React.Component {
 
 const styles = {
     layout: {
-        // flexDirection:'row',
-        // alignItems:'center',
-        // justifyContent:'flex-start'
+        // flexDirection:"row",
+        backgroundColor:'orange',
+        flex:1,
+        justifyContent:'center',
+        alignItems:'stretch'
     }
 };
