@@ -1,4 +1,4 @@
-import {put, call, take, fork, cancel} from 'redux-saga/effects';
+import {put, call, take, fork, cancel, takeLatest} from 'redux-saga/effects';
 import {CANCEL_FETCHING_USER, FETCH_USER, FETCH_USER_SUCCESS} from "../actions/type";
 
 const fetchUserApi = (delay) => new Promise(resolve => {
@@ -13,7 +13,7 @@ const fetchUserApi = (delay) => new Promise(resolve => {
 
 function* fetchUser() {
     try {
-        const response = yield call(fetchUserApi, 2000);
+        const response = yield call(fetchUserApi, 1000);
         yield put({type: FETCH_USER_SUCCESS, payload: response});
     } catch (err) {
         yield put({type: CANCEL_FETCHING_USER});
@@ -21,6 +21,7 @@ function* fetchUser() {
 }
 
 export function* watchFetchUser() {
+    yield takeLatest(FETCH_USER, fetchUser);
     while(yield take(FETCH_USER)){
         const getUser = yield fork(fetchUser);
         yield take(CANCEL_FETCHING_USER);
